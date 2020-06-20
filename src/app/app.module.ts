@@ -9,11 +9,16 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, StoreModule.forRoot({}, {})],
+  imports: [BrowserModule, IonicModule.forRoot(),
+    AppRoutingModule, StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -21,4 +26,4 @@ import { StoreModule } from '@ngrx/store';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
