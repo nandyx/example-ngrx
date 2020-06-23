@@ -7,11 +7,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list *ngFor="let user of users$ |async">
+    <ion-item (click)="delete(user)">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="user.avatar"></ion-img>
+      </ion-thumbnail>
+      <ion-label>{{user.name}} {{user.lastName}}</ion-label>
+      <p>{{user.email}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>
