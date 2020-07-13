@@ -11,13 +11,15 @@ export interface State extends EntityState<User> {
   isLoading: boolean;
   loaded: boolean;
   error: string;
+  selectedUserId: number;
 }
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
 
 export const initialState: State = adapter.getInitialState({
   isLoading: false,
   loaded: false,
-  error: ''
+  error: '',
+  selectedUserId: 0
 });
 
 export const reducer = createReducer(
@@ -38,8 +40,10 @@ export const reducer = createReducer(
   })),
   on(fromActions.deleteUser, (state, action) => {
 
-    // return adapter.removeOne(action.payload.id, state);
-    return adapter.removeAll({...state});
+    return adapter.removeOne(action.payload.id, state);
+    // return adapter.removeAll({...state});
+    // ... state,
+    // selectedUserId: action.payload.id
   }),
 
 );
@@ -49,12 +53,17 @@ export function userReducer(state: State | undefined, action: Action) {
 }
 export const getLoading = (state: State) => state.isLoading;
 export const getLoaded = (state: State) => state.loaded;
+export const getSelectedUserId = (state: State) => state.selectedUserId;
 
 // get the selectors
 const {
+  selectIds,
+  selectEntities,
   selectAll
 } = adapter.getSelectors();
 
 // select the array of users
 export const selectAllUsers = selectAll;
+export const selectUserEntities = selectEntities;
+
 
