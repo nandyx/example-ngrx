@@ -19,3 +19,16 @@ export const getUsers = createSelector(
     getUserPageState,
     fromReducer.selectAllUsers
 );
+const selectUserEntities = createSelector(
+    getUserPageState,
+    fromReducer.selectUserEntities
+  );
+const selectCurrentUserId = createSelector(
+    getUserPageState,
+    fromReducer.getSelectedUserId
+);
+export const selectCurrentUser = createSelector(
+    selectUserEntities,
+    selectCurrentUserId,
+    (userEntities, userId) => userEntities[userId]
+);

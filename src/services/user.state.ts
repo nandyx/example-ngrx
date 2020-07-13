@@ -26,4 +26,7 @@ export class UserState {
     get users$() {
         return this.store.select(fromSelectors.getUsers);
     }
+    get selected$(){
+        return this.store.select(fromSelectors.selectCurrentUser);
+    }
 }
