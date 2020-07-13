@@ -7,13 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor="let user of users$ |async">
-    <ion-item (click)="delete(user)">
-      <ion-thumbnail slot="start">
-        <ion-img [src]="user.avatar"></ion-img>
-      </ion-thumbnail>
-      <ion-label>{{user.name}} {{user.lastName}}</ion-label>
-      <p>{{user.email}}</p>
-    </ion-item>
-  </ion-list>
+  <p *ngIf="isLoading$| async">Loading...</p>
+  <div *ngIf="!(isLoading$| async)">
+    <ion-list *ngFor="let user of users$ |async">
+      <ion-item (click)="delete(user)">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="user.avatar"></ion-img>
+        </ion-thumbnail>
+        <ion-label>{{user.name}} {{user.lastName}}</ion-label>
+        <p>{{user.email}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

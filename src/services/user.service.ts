@@ -9,7 +9,7 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAllUsers(): Observable<User> {
-        return this.http.get(`https://reqres.in/api/users?page=1`)
+        return this.http.get(`https://reqres.in/api/users?page=2&delay=5`)
             .pipe(
                 map((res: any) => {
                     return res.data.map((val: any) => ({
